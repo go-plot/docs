@@ -1,0 +1,40 @@
+/* go-plot branding on Hextra (github.com/go-plot/brand).
+ *
+ * The mark's blue gradient, #5AAEE6 -> #1F77B4 (branding/svg/color/
+ * go-plot.svg), which ends on matplotlib's tab:blue (C0). Hextra derives its
+ * whole primary scale (links, active sidebar entry, buttons) from these three
+ * variables.
+ *
+ * Light theme: #1F77B4 = hsl(205 71% 41%), the gradient's dark end
+ *              (4.82:1 on white).
+ * Dark theme:  #5AAEE6 = hsl(204 74% 63%), its light end. */
+:root {
+  --primary-hue: 205deg;
+  --primary-saturation: 71%;
+  --primary-lightness: 41%;
+}
+.dark {
+  --primary-hue: 204deg;
+  --primary-saturation: 74%;
+  --primary-lightness: 63%;
+}
+
+/* Tables: their headers stand out in the brand
+ * colour and their text is a size smaller than the prose. In the dark theme
+ * the header keeps the deep blue: white on #5AAEE6 cannot be read. */
+.content table { font-size: 0.875em; }
+.content table th { background: #1F77B4; color: #fff; }
+
+/* Figures drawn by go-plot have a white background, as matplotlib's do: in the
+ * dark theme they sit on a white card rather than being inverted. */
+.content img.figure { background: #fff; border-radius: 0.5rem; padding: 0.5rem; }
+
+/* The version selector's list hangs from its button's right edge, so that it
+ * stays on screen at the end of the navbar. */
+.fs-version-select .hextra-nav-menu-items { left: auto !important; right: 0; transform: none !important; }
+
+/* The outdated-version banner (layouts/_partials/custom/content-begin.html). */
+.nd-outdated { margin-top: 1rem; padding: 0.75rem 1rem; border-radius: 0.5rem;
+  border: 1px solid #f59e0b; background: #fffbeb; color: #78350f; }
+.dark .nd-outdated { background: #451a03; color: #fde68a; border-color: #b45309; }
+.nd-outdated a { text-decoration: underline; font-weight: 600; }
