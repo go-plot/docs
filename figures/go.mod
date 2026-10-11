@@ -3,8 +3,8 @@ module github.com/go-plot/docs/figures
 go 1.27.2
 
 require (
-	github.com/go-ndarray/ndarray v0.11.0
-	github.com/go-plot/plot v0.1.0
+	github.com/go-ndarray/ndarray v0.12.0
+	github.com/go-plot/plot v0.1.1
 )
 
 require (
