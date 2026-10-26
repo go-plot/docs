@@ -46,6 +46,25 @@ OS/2 table, alignment, rotation, anchoring), and like Agg the pen is put on a
 whole pixel. How the pixels of text differ from matplotlib's is on
 [Differences]({{< relref "differences#text" >}}).
 
+## Text from data: no TeX
+
+A string is read as matplotlib reads it: TeX between an even number of
+unescaped dollar signs. Names that come from data ("100$", a team called
+`$x$`) should not be. go-plot follows matplotlib's `parse_math`:
+
+| go-plot | matplotlib |
+| --- | --- |
+| `plot.NewFigure(plot.ParseMath(false))`, `fig.SetParseMath(false)` | `rcParams["text.parse_math"] = False` |
+| `plot.PlainText()` on one call | `parse_math=False` on that text |
+| `plot.MathText()` on one call | `parse_math=True` on that text |
+
+The calls that take it are `SetTitle`, `SetXLabel` and `SetYLabel`. So do
+`SetXTickLabels` and `SetYTickLabels` (category names under bars), `Legend`
+(every entry), `Text`, `Annotate` and `Pie`. A plain string is drawn
+character for character as glyph outlines. It never reaches the TeX
+typesetter, and `<script>` becomes shapes, not markup. The tick labels
+go-plot's formatters write (`10³` on a log axis) stay math.
+
 ## Cost
 
 STIX Two Math is parsed only when a label contains TeX: a figure without any

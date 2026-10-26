@@ -6,7 +6,7 @@
 # version of go-plot/plot the pages describe (0.1, 0.2, ...), or "main" while no
 # release is tagged. The CI sets it through --baseURL, from
 # params.plot.version below. This default is the same build.
-baseURL: "https://go-plot.github.io/docs/0.2/"
+baseURL: "https://go-plot.github.io/docs/0.3/"
 title: "go-plot"
 # themes/hextra is the tannevaled/hextra fork, pinned at a release tag:
 # upstream Hextra plus opt-in features (partial menu items, combos,
@@ -90,7 +90,7 @@ params:
   # documentation's version label (v0.1.2 -> 0.1): the CI reads it here.
   # The figures/ module requires the same version: the CI checks they agree.
   plot:
-    version: "v0.2.0"
+    version: "v0.3.0"
   versions:
     # The version selector shows "main" with the development icon.
     development: "main"
