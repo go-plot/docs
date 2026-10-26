@@ -68,6 +68,34 @@ a pad. Usually the same place; not always.
 The SVG carries the same geometry but not matplotlib's document structure, ids
 or metadata.
 
+Since v0.2.0 the SVG can be inlined in an HTML page served under a strict
+Content-Security-Policy:
+
+- Paint is in presentation attributes (`fill="…"`), not `style="…"`, which a
+  `style-src` without `'unsafe-inline'` would drop.
+- There is no script and no event attribute.
+- No reference leaves the document.
+- Text is glyph outlines, so no label can become markup.
+- A clip's id is derived from its rectangle, so two figures inlined in one page
+  cannot clip each other.
+
+The one `data:` URI is an `Imshow` image.
+
+### Pie
+
+`Pie` is `ax.pie` with matplotlib's defaults. It differs in six places:
+
+- The refusals (negative, NaN, infinite, all zero) are returned as
+  `ErrPieNegative`, `ErrPieNonFinite` and `ErrPieZero`, not raised.
+- A sum of sizes that overflows is taken after scaling, where matplotlib draws
+  every wedge empty.
+- `AutoPct` takes Go format verbs (`"%1.1f%%"` works in both; Python's `%d`
+  is Go's `%.0f`).
+- `labeldistance=None` is `LabelDistance(math.NaN())`.
+- There is no `shadow`, no `hatch` and no `frame=True`.
+- `Donut`, `PlainText` (labels never reach TeX) and `SpreadLabels` (labels of
+  thin wedges moved apart, with leader lines) are go-plot's own.
+
 ### No module-level pyplot
 
 `plt.plot`, `plt.xlabel` and the other functions acting on a hidden current
@@ -82,7 +110,7 @@ Axes are not provided, by design: see [the API]({{< relref "api" >}}).
 - `constrained_layout`;
 - `subplots` sharing;
 - hatching;
-- boxplot, violin, pie, quiver, stem, step, `pcolormesh`, 3-D;
+- boxplot, violin, quiver, stem, step, `pcolormesh`, 3-D;
 - colorbar `extend` and discrete norms;
 - image interpolation other than nearest;
 - `Text` bounding boxes;

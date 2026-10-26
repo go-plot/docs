@@ -8,7 +8,7 @@ tags: [start]
 ## Install
 
 ```sh
-go get github.com/go-plot/plot@v0.1.0
+go get github.com/go-plot/plot@v0.2.0
 ```
 
 Go 1.27.2 or later. Nothing else: no Python, no C library, no font to install.
