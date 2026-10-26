@@ -5,7 +5,7 @@ description: "Every plot type of v0, each with the code that drew it."
 tags: [api, gallery]
 ---
 
-Each figure on this page was drawn by go-plot v0.2.0 from the code below it.
+Each figure on this page was drawn by go-plot v0.3.0 from the code below it.
 The code is not a copy: the page reads it from
 [`figures/`](https://github.com/go-plot/docs/tree/main/figures) in this
 site's repository, where `go run .` draws every image, and the CI draws them
