@@ -5,7 +5,7 @@ description: "Every plot type of v0, each with the code that drew it."
 tags: [api, gallery]
 ---
 
-Each figure on this page was drawn by go-plot v0.1.0 from the code below it.
+Each figure on this page was drawn by go-plot v0.2.0 from the code below it.
 The code is not a copy: the page reads it from
 [`figures/`](https://github.com/go-plot/docs/tree/main/figures) in this
 site's repository, where `go run .` draws every image, and the CI draws them
@@ -23,6 +23,7 @@ again and fails if any differs from the one shown. `linspace` is a helper in
 | reference lines | `Axhline`, `Axvline` | `ax.axhline`, `ax.axvline` |
 | images | `Imshow` (2-D data or RGB(A)) | `ax.imshow` |
 | contours | `Contour`, `Contourf` | `ax.contour`, `ax.contourf` |
+| pies, rings | `Pie`, `Donut` | `ax.pie`, `ax.pie(wedgeprops=dict(width=w))` |
 | text | `Text`, `Annotate` | `ax.text`, `ax.annotate` |
 | scales, axes | `SetXScale("log")`, `TwinX`, `SetXTicks`, `SetAspect` | `ax.set_xscale`, `ax.twinx`, `ax.set_xticks`, `ax.set_aspect` |
 | colour scale | `Figure.Colorbar` | `fig.colorbar` |
@@ -77,6 +78,33 @@ levels chosen as matplotlib chooses them (`ContourSet._autolev`). x and y give
 the column and row coordinates.
 
 {{< plotfig "contour" "Filled contours of a two-dimensional function in RdBu_r with black contour lines and a colorbar" >}}
+
+## Pie and donut
+
+`Pie` is matplotlib's `ax.pie`.
+
+- Wedge i covers `x[i]/sum(x)` of a turn, from 3 o'clock counter-clockwise, in
+  the colours of the cycle.
+- Labels sit at 1.1 radii, and `AutoPct` percentages at 0.6.
+- The Axes gets an equal aspect, no frame and no ticks.
+- The judge against matplotlib compares every wedge path vertex by vertex,
+  every label's position and alignment, the Axes box, and ≥ 99% of the pixels.
+
+Sizes that are negative, NaN, infinite or all zero return an error
+(`ErrPieNegative`, `ErrPieNonFinite`, `ErrPieZero`) and draw nothing, as
+matplotlib raises.
+
+`Donut(x, width)` is a ring, with the percentages in its middle. Two go-plot
+options matter for data-driven charts:
+
+- `PlainText()` sets the labels as they are, with no TeX: "$5" is a dollar.
+- `SpreadLabels()` moves the labels of thin wedges apart, with leader lines.
+
+`StartAngle(90), CounterClock(false)` starts at 12 o'clock and runs clockwise,
+as go-widgets/toolkit's interactive `PieChart` does.
+`Colors(colors.Tableau10...)` gives the toolkit's palette.
+
+{{< plotfig "pie" "A pie of four expense categories with percentages, and a donut with white edges and its percentages on the ring" >}}
 
 ## Log scales
 

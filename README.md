@@ -25,7 +25,7 @@ while no release is tagged:
 
 `https://go-plot.github.io/docs/` redirects to `latest/`. Each push to `main`
 replaces the directory of the version it describes, and nothing else. The
-pages describe **v0.1.0**, published under `0.1/`.
+pages describe **v0.2.0**, published under `0.2/`.
 
 To document a new release, set `params.plot.version` to its tag, require the
 same version in `figures/go.mod`, redraw the figures, and update the pages.
@@ -68,10 +68,10 @@ cd figures && go run .
 git clone --recurse-submodules https://github.com/go-plot/docs.git
 cd docs
 mkdir -p data && sh themes/hextra/scripts/page-history.sh > data/pagehistory.json
-hugo server --baseURL http://localhost:1313/docs/0.1/
+hugo server --baseURL http://localhost:1313/docs/0.2/
 ```
 
-then open <http://localhost:1313/docs/0.1/>. Hugo 0.146 or later; no Python,
+then open <http://localhost:1313/docs/0.2/>. Hugo 0.146 or later; no Python,
 no Node. Go 1.27.2 or later only to redraw the figures.
 
 ## Publication

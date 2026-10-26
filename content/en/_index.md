@@ -20,13 +20,16 @@ set by a real TeX math typesetter, [go-tex/math](https://github.com/go-tex/math)
 <img class="figure" src="images/figures/quickstart.svg" alt="A sine curve drawn as a line and as markers, with a TeX label and a legend">
 
 These pages describe [go-plot/plot](https://github.com/go-plot/plot)
-**v0.1.0**. Every figure in them was drawn by that version, from the code shown
-beside it.
+**v0.2.0**. Every figure in them was drawn by that version, from the code shown
+beside it. New in v0.2.0:
+
+- [pie and donut charts]({{< relref "plot-types#pie-and-donut" >}}).
+- An SVG that can be inlined under a strict Content-Security-Policy.
 
 ## Install
 
 ```sh
-go get github.com/go-plot/plot@v0.1.0
+go get github.com/go-plot/plot@v0.2.0
 ```
 
 The module needs Go 1.27.2 or later. It is pure Go (`CGO_ENABLED=0`) and builds
