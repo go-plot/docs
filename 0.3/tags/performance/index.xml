@@ -1,0 +1,143 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>go-plot – Performance</title><link>https://go-plot.github.io/docs/0.3/tags/performance/</link><description>Recent content in Performance on go-plot</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://go-plot.github.io/docs/0.3/tags/performance/index.xml" rel="self" type="application/rss+xml"/><item><title>Performance</title><link>https://go-plot.github.io/docs/0.3/performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://go-plot.github.io/docs/0.3/performance/</guid><description>
+&lt;p&gt;Two figures, each saved as PNG and as SVG, at matplotlib&amp;rsquo;s default size
+(6.4 x 4.8 in, 100 dpi):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;line&lt;/strong&gt;: &lt;code&gt;Plot&lt;/code&gt; of a 1,000,000-point random walk;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;imshow&lt;/strong&gt;: &lt;code&gt;Imshow&lt;/code&gt; of a 1000 x 1000 array (&lt;code&gt;sin(i/37)·cos(j/23)&lt;/code&gt;), viridis.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="results"&gt;Results&lt;span class="hx:absolute hx:-mt-20" id="results"&gt;&lt;/span&gt;
+&lt;a href="#results" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;case&lt;/th&gt;
+&lt;th&gt;go-plot median (s)&lt;/th&gt;
+&lt;th&gt;matplotlib median (s)&lt;/th&gt;
+&lt;th&gt;matplotlib / go-plot&lt;/th&gt;
+&lt;th&gt;go-plot bytes&lt;/th&gt;
+&lt;th&gt;matplotlib bytes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;line, 1e6 points, PNG&lt;/td&gt;
+&lt;td&gt;0.055&lt;/td&gt;
+&lt;td&gt;0.065&lt;/td&gt;
+&lt;td&gt;1.2x&lt;/td&gt;
+&lt;td&gt;40,600&lt;/td&gt;
+&lt;td&gt;28,055&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;line, 1e6 points, SVG&lt;/td&gt;
+&lt;td&gt;0.019&lt;/td&gt;
+&lt;td&gt;0.053&lt;/td&gt;
+&lt;td&gt;2.8x&lt;/td&gt;
+&lt;td&gt;218,801&lt;/td&gt;
+&lt;td&gt;224,082&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imshow 1000², PNG&lt;/td&gt;
+&lt;td&gt;0.025&lt;/td&gt;
+&lt;td&gt;0.042&lt;/td&gt;
+&lt;td&gt;1.7x&lt;/td&gt;
+&lt;td&gt;154,860&lt;/td&gt;
+&lt;td&gt;157,539&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imshow 1000², SVG&lt;/td&gt;
+&lt;td&gt;0.020&lt;/td&gt;
+&lt;td&gt;0.042&lt;/td&gt;
+&lt;td&gt;2.1x&lt;/td&gt;
+&lt;td&gt;207,581&lt;/td&gt;
+&lt;td&gt;198,367&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Spread (min / max over the 9 runs):&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;case&lt;/th&gt;
+&lt;th&gt;go-plot&lt;/th&gt;
+&lt;th&gt;matplotlib&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;line PNG&lt;/td&gt;
+&lt;td&gt;0.052 / 0.085&lt;/td&gt;
+&lt;td&gt;0.061 / 0.107&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;line SVG&lt;/td&gt;
+&lt;td&gt;0.018 / 0.024&lt;/td&gt;
+&lt;td&gt;0.050 / 0.063&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imshow PNG&lt;/td&gt;
+&lt;td&gt;0.023 / 0.034&lt;/td&gt;
+&lt;td&gt;0.040 / 0.058&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;imshow SVG&lt;/td&gt;
+&lt;td&gt;0.019 / 0.034&lt;/td&gt;
+&lt;td&gt;0.041 / 0.049&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;go-plot&amp;rsquo;s PNGs are larger because it encodes with &lt;code&gt;png.BestSpeed&lt;/code&gt;; matplotlib
+uses zlib&amp;rsquo;s default level.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="method"&gt;Method&lt;span class="hx:absolute hx:-mt-20" id="method"&gt;&lt;/span&gt;
+&lt;a href="#method" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;tools/compare/perf.py&lt;/code&gt; (driving &lt;code&gt;tools/compare/perf/main.go&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;both sides build the same data, with the same generator, &lt;strong&gt;before&lt;/strong&gt; the clock
+starts; the clock covers creating the figure, plotting, and writing the file
+to memory;&lt;/li&gt;
+&lt;li&gt;every measurement is a &lt;strong&gt;fresh process&lt;/strong&gt; on both sides (so neither keeps a
+warm glyph or path cache the other lacks), and the two are &lt;strong&gt;interleaved&lt;/strong&gt;
+case by case, run by run, so that load changes on the host hit both alike;&lt;/li&gt;
+&lt;li&gt;9 runs per case; the tables give &lt;strong&gt;medians&lt;/strong&gt;, with the spread.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;What is &lt;em&gt;not&lt;/em&gt; in the numbers: Python&amp;rsquo;s interpreter start and
+&lt;code&gt;import matplotlib.pyplot&lt;/code&gt; (about half a second on this machine), and the Go
+process start (a few milliseconds). A notebook keeps both warm, so the
+in-process time is the comparable one.&lt;/p&gt;
+&lt;p&gt;Host: Apple M4 Max, 16 cores, macOS; Go 1.27.2; Python 3.12.12, matplotlib
+3.11.2, NumPy 2.5.3, Agg backend. &lt;strong&gt;The host was shared and loaded&lt;/strong&gt;: load
+average 22.6 before the run and 21.7 after it, on 16 cores. Absolute times are
+therefore pessimistic for both; the interleaving is what keeps the ratio fair.
+Measured 2026-10-10.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="where-the-time-goes-and-what-changed-to-get-here"&gt;Where the time goes, and what changed to get here&lt;span class="hx:absolute hx:-mt-20" id="where-the-time-goes-and-what-changed-to-get-here"&gt;&lt;/span&gt;
+&lt;a href="#where-the-time-goes-and-what-changed-to-get-here" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The first measurement of the line PNG was &lt;strong&gt;0.124 s, half matplotlib&amp;rsquo;s speed&lt;/strong&gt;.
+Profiling (&lt;code&gt;go test -bench -cpuprofile&lt;/code&gt;) showed three costs, each now fixed:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the data limits of the million points were recomputed per axis per draw
+(0.67 s of 2.2 s sampled): they are now taken once, when the artist is
+added;&lt;/li&gt;
+&lt;li&gt;the coverage sweep of go-gfx&amp;rsquo;s rasteriser sorts each scanline&amp;rsquo;s crossings
+by insertion, quadratic in the crossings, and a dense polyline has thousands
+per scanline: strokes of more than 512 segments are now rasterised in
+512-segment pieces (matplotlib has the same knob, &lt;code&gt;agg.path.chunksize&lt;/code&gt;, off
+by default), whose seams are round joins, so the only visible change is that
+the line&amp;rsquo;s own two ends are round rather than projecting;&lt;/li&gt;
+&lt;li&gt;STIX Two Math (for TeX labels) was parsed on every figure: it is now parsed
+only when a label contains TeX.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Like matplotlib, go-plot simplifies dense lines before drawing them
+(matplotlib&amp;rsquo;s &lt;code&gt;PathSimplifier&lt;/code&gt;, ported): the 1e6-point walk is drawn as 11,738
+vertices. That is why the SVG of a million points is about 220 kB on both
+sides.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="reproduce"&gt;Reproduce&lt;span class="hx:absolute hx:-mt-20" id="reproduce"&gt;&lt;/span&gt;
+&lt;a href="#reproduce" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/go-plot/plot &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; plot/tools/compare
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;uv run --with matplotlib --with numpy python perf.py &lt;span class="m"&gt;9&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+aria-label="Copy code"
+data-copied-label="Copied!"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item></channel></rss>
