@@ -54,7 +54,6 @@ cd figures && go run .
 | `figures/` | the Go module that draws every figure, one file each |
 | `layouts/_shortcodes/plotfig.html` | a figure and the code that drew it |
 | `static/images/figures/` | the figures, as `figures/` writes them |
-| `layouts/_partials/custom/version-select.html` | the version selector (reads `versions.json`), from go-ndarray/docs |
 | `layouts/_partials/custom/content-begin.html` | the outdated-version banner (reads `versions.json`) |
 | `layouts/_partials/favicons.html` | the brand's favicons |
 | `assets/css/custom.css` | the brand blue as Hextra's primary colour, the table headers, a white card under figures |
@@ -67,7 +66,7 @@ cd figures && go run .
 ```sh
 git clone --recurse-submodules https://github.com/go-plot/docs.git
 cd docs
-mkdir -p data && sh themes/hextra/scripts/page-history.sh > data/pagehistory.json
+mkdir -p data && go run github.com/tannevaled/hextra/cmd/pagehistory@v0.21.0 > data/pagehistory.json
 hugo server --baseURL http://localhost:1313/docs/0.3/
 ```
 
